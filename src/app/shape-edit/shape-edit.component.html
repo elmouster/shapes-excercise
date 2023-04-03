@@ -1,17 +1,22 @@
 <p>Edit Shapes</p>
 <form name="shapes-edit"> 
-    <div class="shapes-edit-segment" *ngfor="let shape of shapes; index as i">
-        <div *ngIf="shape instanceof Circle">
-            <app-circle [radius]=shape.radius [form]="form" [name]="i"></app-circle>
-        </div>
+    <div *ngIf="shapes.length">
+        <div class="shapes-edit-segment" *ngFor="let shape of shapes; let i = index">
+            <div *ngIf="(shape | typeOfShape) === 'Circle'">
+                <app-circle [radius]="(shape | castTo : Circle).radius" [form]="form" [name]="i"></app-circle>
+            </div>
 
-        <div *ngIf="shape instanceof Square">
-            <app-square [size]=shape.size [form]="form" [name]="i"></app-square>
-        </div>
+            <div *ngIf="(shape | typeOfShape) === 'Square'">
+                <app-square [size]="(shape | castTo : Square).size" [form]="form" [name]="i"></app-square>
+            </div>
 
-        <div *ngIf="shape instanceof Rectangle">
-            <app-rectangle [width]=shape.width [width]=shape.length [form]="form" [name]="i"></app-rectangle>
+            <div *ngIf="(shape | typeOfShape) === 'Rectangle'">
+                <app-rectangle [width]="(shape | castTo : Rectangle).width" [width]="(shape | castTo : Rectangle).length" [form]="form" [name]="i"></app-rectangle>
+            </div>
         </div>
+        <button type="submit" (click)="onShapesEditSubmit()">Save Edits</button>
     </div>
-    <button type="submit" (click)="onShapesEditSubmit()">Save Edits</button>
+    <div *ngIf="!shapes.length">
+        Form is loading...
+    </div>
 </form>

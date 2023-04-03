@@ -8,6 +8,8 @@ import { CircleComponent } from './circle/circle.component';
 import { SquareComponent } from './square/square.component';
 import { RectangleComponent } from './rectangle/rectangle.component';
 import { ShapeEditComponent } from './shape-edit/shape-edit.component';
+import { TypeOfShapePipe } from './type-of-shape.pipe';
+import { CastToPipe } from './cast-to.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ShapeEditComponent } from './shape-edit/shape-edit.component';
     CircleComponent,
     SquareComponent,
     RectangleComponent,
-    ShapeEditComponent
+    ShapeEditComponent,
+    TypeOfShapePipe,
+    CastToPipe
   ],
   imports: [
     ReactiveFormsModule,

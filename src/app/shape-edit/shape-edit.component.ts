@@ -12,18 +12,23 @@ import { ShapesService } from '../shapes.service';
 
 export class ShapeEditComponent implements OnInit, OnDestroy {
   subscribtion: Subscription = new Subscription;
-  shapes: Shape[] = [];
+  shapes: (Circle | Rectangle | Square)[] = [];
   form!: FormGroup;
+  Square = Square;
+  Circle = Circle;
+  Rectangle = Rectangle;
 
   constructor(private shapeService: ShapesService) { }
   
-  ngOnInit(): void {this.subscribtion = this.shapeService.getShapes().subscribe(
-    {
-      next: (gotShapes) => {
-        this.shapes = gotShapes;
-        this.buildForm();
+  ngOnInit(): void {
+    this.subscribtion = this.shapeService.getShapes().subscribe(
+      (gotShapes) => {
+        if (gotShapes.length) {
+        this.shapes = gotShapes as (Circle | Rectangle | Square)[];
+          this.buildForm(gotShapes);
+        }
       }
-    });
+    );
   };
 
   ngOnDestroy(): void {
@@ -34,10 +39,10 @@ export class ShapeEditComponent implements OnInit, OnDestroy {
 
   };
 
-  buildForm() {
+  buildForm(shapes : Shape[]) {
     const formShapes: {[key: number]: FormControl} = {};
 
-    this.shapes.forEach((shapeEdit, index) => {
+    shapes.forEach((shapeEdit, index) => {
       if (shapeEdit instanceof Circle) {
         formShapes[index] = new FormControl({radius: shapeEdit.radius});
       }
