@@ -1,7 +1,10 @@
 <hr/>
 <p>rectangle section</p>
-<label for="rectangle-width">Rectangle Width</label>
-<input type="text" value={{width}} #rectangleWidth name="rectangle-width" />
-<label for="rectangle-length">Rectangle Length</label>
-<input type="text" value={{length}} #rectangleLength name="rectangle-length" />
+<form [name]="name" [formGroup]="form">
+    <label for="rectangle-width">Rectangle Width</label>
+    <input type="text" [value]="width" #rectangleWidth name="rectangle-width" />
+    <label for="rectangle-length">Rectangle Length</label>
+    <input type="text" [value]="length" #rectangleLength name="rectangle-length" />
+    <input type="hidden" name="type" value="Rectangle">
+</form>
 <hr/>

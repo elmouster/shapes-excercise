@@ -3,15 +3,15 @@
     <div *ngIf="shapes.length">
         <div class="shapes-edit-segment" *ngFor="let shape of shapes; let i = index">
             <div *ngIf="(shape | typeOfShape) === 'Circle'">
-                <app-circle [radius]="(shape | castTo : Circle).radius" [form]="form" [name]="i"></app-circle>
+                <app-circle [radius]="(shape | castTo).radius" [form]="form" [name]="i"></app-circle>
             </div>
 
             <div *ngIf="(shape | typeOfShape) === 'Square'">
-                <app-square [size]="(shape | castTo : Square).size" [form]="form" [name]="i"></app-square>
+                <app-square [size]="(shape | castTo).size" [form]="form" [name]="i"></app-square>
             </div>
 
             <div *ngIf="(shape | typeOfShape) === 'Rectangle'">
-                <app-rectangle [width]="(shape | castTo : Rectangle).width" [width]="(shape | castTo : Rectangle).length" [form]="form" [name]="i"></app-rectangle>
+                <app-rectangle [width]="(shape | castTo).width" [length]="(shape | castTo).length" [form]="form" [name]="i"></app-rectangle>
             </div>
         </div>
         <button type="submit" (click)="onShapesEditSubmit()">Save Edits</button>

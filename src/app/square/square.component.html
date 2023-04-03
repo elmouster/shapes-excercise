@@ -1,5 +1,8 @@
 <hr/>
 <p>circle section</p>
-<label for="square-size">Square Size</label>
-<input type="text" value={{size}} #squareSize name="square-size" />
+<form [name]="name" [formGroup]="form">
+    <label for="square-size">Square Size</label>
+    <input type="text" [value]="size" #squareSize name="square-size" />
+    <input type="hidden" name="type" value="Square">
+</form>
 <hr/>

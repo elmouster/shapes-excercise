@@ -1,5 +1,8 @@
 <hr/>
 <p>circle section</p>
-<label for="circle-radius">Circle Radius</label>
-<input type="text" value={{radius}} #circleRadius name="circle-radius" />
+<form [name]="name" [formGroup]="form">
+    <label for="circle-radius">Circle Radius</label>
+    <input type="text" [value]="radius" #circleRadius name="circle-radius" />
+    <input type="hidden" name="type" value="Circle">
+</form>
 <hr/>

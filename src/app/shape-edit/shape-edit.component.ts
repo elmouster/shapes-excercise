@@ -36,7 +36,21 @@ export class ShapeEditComponent implements OnInit, OnDestroy {
   }
 
   onShapesEditSubmit(): void {
-
+    const shapesToSave: Shape[] = [];
+    this.form.value.forEach((shapeEdited: {[key: number] : {[key: string]: number | string}}) => {
+      switch (shapeEdited[0]['type']) {
+        case 'Circle': 
+          shapesToSave.push(new Circle(+shapeEdited[0]['radius']))
+          break;
+        case 'Square': 
+          shapesToSave.push(new Square(+shapeEdited[0]['size']))
+          break;
+        case 'Rectangle': 
+          shapesToSave.push(new Rectangle(+shapeEdited[0]['width'], +shapeEdited[0]['length']))
+          break;
+      }
+    });
+    this.shapeService.saveShapes(shapesToSave);
   };
 
   buildForm(shapes : Shape[]) {
@@ -44,13 +58,13 @@ export class ShapeEditComponent implements OnInit, OnDestroy {
 
     shapes.forEach((shapeEdit, index) => {
       if (shapeEdit instanceof Circle) {
-        formShapes[index] = new FormControl({radius: shapeEdit.radius});
+        formShapes[index] = new FormControl({radius: shapeEdit.radius, type: 'Circle'});
       }
       if (shapeEdit instanceof Square) {
-        formShapes[index] = new FormControl({size: shapeEdit.size});
+        formShapes[index] = new FormControl({size: shapeEdit.size, type: 'Square'});
       }
       if (shapeEdit instanceof Rectangle) {
-        formShapes[index] = new FormControl({width: shapeEdit.width, length: shapeEdit.length});
+        formShapes[index] = new FormControl({width: shapeEdit.width, length: shapeEdit.length, type: 'Rectangle'});
       }
     })
 
